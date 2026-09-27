@@ -42,9 +42,10 @@
     const texts = [...heroEl.querySelectorAll('.hero__text-item')];
     const dots = [...heroEl.querySelectorAll('.dot')];
     const counter = heroEl.querySelector('.hero__meta .num');
-    const DUR = 6500;
+    const DUR = 8000;
     heroEl.style.setProperty('--slide-dur', DUR + 'ms');
-    let i = 0, timer = null, paused = false;
+    let i = 0, timer = null, paused = false, userPaused = false;
+    const pauseBtn = heroEl.querySelector('.hero__pause');
 
     function show(n) {
       i = (n + slides.length) % slides.length;
@@ -63,14 +64,24 @@
     function start() {
       stop();
       if (reduceMotion || slides.length < 2) return;
+      if (userPaused) return;
       timer = setInterval(() => { if (!paused && !document.hidden) next(); }, DUR);
     }
     function stop() { if (timer) clearInterval(timer); timer = null; }
 
     dots.forEach((d, k) => d.addEventListener('click', () => { show(k); start(); }));
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => {
+        userPaused = !userPaused;
+        pauseBtn.setAttribute('aria-pressed', String(userPaused));
+        pauseBtn.setAttribute('aria-label', userPaused ? 'Play slideshow' : 'Pause slideshow');
+        heroEl.classList.toggle('is-paused', userPaused);
+        if (userPaused) stop(); else { show(i); start(); }
+      });
+    }
     heroEl.addEventListener('mouseenter', () => { paused = true; });
     heroEl.addEventListener('mouseleave', () => { paused = false; });
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) start(); });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && !userPaused) start(); });
 
     // touch swipe
     let x0 = null;

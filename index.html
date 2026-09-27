@@ -18,7 +18,7 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="images/hero-01.jpg" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css">
   <script type="application/ld+json">
@@ -102,11 +102,12 @@
 
 <section class="hero" aria-label="Introduction">
   <div class="hero__slides">
-    <div class="slide is-active"><div class="slide__img" style="background-image:url(images/hero-01.jpg)" role="img" aria-label="Early-career professionals in a glass boardroom"></div></div>
-    <div class="slide"><div class="slide__img" style="background-image:url(images/hero-02.jpg)" role="img" aria-label="A professional walking confidently through a corporate lobby"></div></div>
-    <div class="slide"><div class="slide__img" style="background-image:url(images/hero-03.jpg)" role="img" aria-label="Professionals at a business dinner"></div></div>
+    <div class="slide is-active"><div class="slide__img" style="background-image:url(images/hero-01.jpg)" role="img" aria-label="A new hire leans in to speak during a team meeting at a long oak table in a brick office"></div></div>
+    <div class="slide slide--deep"><div class="slide__img" style="background-image:url(images/hero-02.jpg)" role="img" aria-label="A young professional adjusts her sleeve while waiting at the elevator in a concrete and oak lobby"></div></div>
+    <div class="slide"><div class="slide__img" style="background-image:url(images/hero-03.jpg)" role="img" aria-label="A new hire watches a senior colleague at a relaxed daylight team lunch"></div></div>
   </div>
   <div class="hero__content container">
+    <div class="hero__stack">
     <div class="hero__grid">
       <div class="hero__text">
         <div class="hero__text-item is-active">
@@ -136,7 +137,9 @@
           <button class="dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
           <button class="dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
         </div>
+        <button class="hero__pause" type="button" aria-pressed="false" aria-label="Pause slideshow"><svg class="i-pause" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".6"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".6"/></svg><svg class="i-play" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z"/></svg></button>
       </div>
+    </div>
     </div>
   </div>
   <div class="hero__scroll" aria-hidden="true">Scroll <i></i></div>
@@ -150,11 +153,11 @@
 </div>
 
 <section class="section section--dark" id="why">
-  <div class="bg-image bg-parallax" style="background-image:url(images/bg-dark-gold.jpg);opacity:.42;background-position:center right"></div>
+  <div class="bg-image bg-parallax" style="background-image:url(images/bg-hills.jpg);opacity:.35;background-position:center"></div>
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">The cost of a missed step</p>
-      <h2 class="h-l reveal-lines">Every early exit is <span class="serif gold">expensive.</span> Every prepared hire is an asset.</h2>
+      <h2 class="h-l reveal-lines">Every early exit is expensive. Every prepared hire is an asset.</h2>
     </div>
     <div class="stats reveal-stagger">
       <div class="stat">
@@ -194,7 +197,7 @@
         </div>
       </div>
       <div class="split__media reveal">
-        <img src="images/module-05-managing-up.jpg" alt="A young professional in a one-on-one meeting with a senior executive" loading="lazy" width="1500" height="1130">
+        <img src="images/outcomes-first-week.jpg" alt="A manager walks a new hire through his first week at a standing desk in a bright open office" loading="lazy" width="1400" height="1750">
         <span class="split__caption">What We Need: 4 hours of employee time</span>
       </div>
     </div>
@@ -205,7 +208,7 @@
   <div class="container">
     <div class="section-head section-head--center reveal">
       <p class="eyebrow">Who benefits most</p>
-      <h2 class="h-l">Built for the people you most want to <span class="serif gold">keep.</span></h2>
+      <h2 class="h-l">Built for the people you most want to keep.</h2>
       <p class="lead muted">Level Set is not remedial. It is the education nobody hands you on day one.</p>
     </div>
     <div class="cards reveal-stagger">
@@ -221,7 +224,7 @@
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">One program. Two audiences.</p>
-      <h2 class="h-l">Same six modules. <span class="serif gold">Two starting points.</span></h2>
+      <h2 class="h-l">Same six modules. Two starting points.</h2>
       <p class="lead muted">Level Set is one program. We adapt the modules to where your people are: already on the job, or about to start.</p>
     </div>
     <div class="cards cards--two reveal-stagger">
@@ -244,7 +247,7 @@
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">What we provide</p>
-      <h2 class="h-l">Six modules on the unwritten rules of <span class="serif gold">professional success.</span></h2>
+      <h2 class="h-l">Six modules on the unwritten rules of professional success.</h2>
       <p class="lead muted">Delivered in four hours of employee time. Practical, specific and immediately usable.</p>
     </div>
     <div class="modules reveal-stagger">
@@ -332,7 +335,7 @@
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">Brought to you by</p>
-      <h2 class="h-l">Decades of boardrooms. <span class="serif gold">Decades of television.</span> One curriculum.</h2>
+      <h2 class="h-l">Decades of boardrooms. Decades of television. One curriculum.</h2>
     </div>
     <div class="founders reveal-stagger">
       <article class="founder">
@@ -375,7 +378,7 @@
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">From the room</p>
-      <h2 class="h-l">HEADLINE <span class="serif gold">HERE.</span></h2>
+      <h2 class="h-l">HEADLINE HERE.</h2>
     </div>
     <div class="proof reveal">
       <figure class="proof__item">
@@ -388,7 +391,6 @@
 -->
 
 <section class="section section--dark" id="formula">
-  <div class="bg-image bg-image--dim bg-parallax" style="background-image:url(images/bg-boardroom.jpg)"></div>
   <div class="container">
     <div class="formula">
       <div class="reveal">
@@ -415,7 +417,7 @@
 </section>
 
 <section class="section cta">
-  <div class="bg-image bg-parallax" style="background-image:url(images/bg-cream-silk.jpg);opacity:.4"></div>
+  <div class="bg-image bg-parallax" style="background-image:url(images/bg-linen.jpg);opacity:.35"></div>
   <div class="container">
     <div class="reveal">
       <p class="eyebrow">Start the conversation</p>
