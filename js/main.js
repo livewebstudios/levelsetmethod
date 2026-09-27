@@ -167,19 +167,20 @@
   const form = document.querySelector('form[data-form]');
   if (form) {
     form.addEventListener('submit', async (e) => {
-      // Netlify Forms handles the POST natively. We enhance with fetch so the
-      // page does not reload; if fetch fails we fall back to native submit.
+      // Formspree accepts the POST natively. We enhance with fetch (JSON accept
+      // header) so the page does not reload; if fetch fails we fall back to a
+      // native submit, which lands on Formspree's own confirmation page.
       if (!window.fetch) return;
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
       const orig = btn.innerHTML;
       btn.disabled = true; btn.innerHTML = 'Sending…';
       try {
-        const data = new FormData(form);
-        const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() });
+        const res = await fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
         if (!res.ok) throw new Error('bad status');
         form.hidden = true;
-        document.querySelector('.form-success')?.classList.add('is-shown');
+        const ok = document.querySelector('.form-success');
+        if (ok) { ok.classList.add('is-shown'); ok.tabIndex = -1; ok.focus(); }
       } catch (err) {
         btn.disabled = false; btn.innerHTML = orig;
         form.submit();

@@ -285,6 +285,32 @@ strong{font-weight:700}
 .card p{font-size:15px;color:var(--grey)}
 @media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.cards{grid-template-columns:1fr}}
+.cards--two{grid-template-columns:repeat(2,1fr)}
+.card__eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:18px}
+.cards--two .card{padding:clamp(32px, 3.4vw, 48px)}
+.cards--two .card h3{font-size:clamp(22px, 2vw, 28px)}
+.cards--two .card p{font-size:16px}
+.audience-note{margin-top:28px;text-align:center;color:var(--grey);font-size:15px}
+@media (max-width:760px){.cards--two{grid-template-columns:1fr}}
+
+/* -------------------------------------------------------------------------
+   Delivery (headline stat + four facts)
+   ------------------------------------------------------------------------- */
+.delivery__stat{font-family:var(--font-display);font-weight:700;font-size:clamp(26px, 3vw, 40px);line-height:1.15;letter-spacing:-.02em}
+.delivery__stat .gold{font-size:1.4em}
+.delivery__note{margin-top:16px;font-size:14px;color:var(--grey);max-width:60ch}
+.section--dark .delivery__note{color:var(--grey-2)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:clamp(32px, 4vw, 56px)}
+.fact{background:var(--cream);padding:clamp(24px, 2.6vw, 36px)}
+.section--cream2 .fact{background:var(--cream-2)}
+.fact dt{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink);font-weight:700;margin-bottom:12px}
+.fact dd{margin:0;font-family:var(--font-display);font-weight:700;font-size:clamp(18px, 1.6vw, 22px);line-height:1.25}
+.fact dd span{display:block;margin-top:8px;font-family:var(--font-body);font-weight:400;font-size:14.5px;color:var(--grey);line-height:1.5}
+@media (max-width:1000px){.facts{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.facts{grid-template-columns:1fr}}
+
+/* Unregistered trademark mark */
+.tm{font-size:.5em;vertical-align:super;line-height:0;font-weight:400;letter-spacing:0}
 
 /* -------------------------------------------------------------------------
    Modules (dark grid, image cards)
@@ -374,6 +400,15 @@ strong{font-weight:700}
 @media (max-width:700px){.step{grid-template-columns:1fr}.step__meta{display:none}}
 
 /* -------------------------------------------------------------------------
+   Proof (index.html, commented out until real pilots/quotes exist)
+   ------------------------------------------------------------------------- */
+.proof{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:clamp(20px, 3vw, 40px)}
+.proof__item{margin:0;padding:clamp(24px, 3vw, 40px);background:var(--cream);border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.proof__item blockquote{margin:0;font-family:var(--font-serif);font-style:italic;font-size:clamp(20px, 1.8vw, 26px);line-height:1.35}
+.proof__item figcaption{padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--grey)}
+.proof__item figcaption strong{display:block;color:var(--ink);font-weight:700}
+
+/* -------------------------------------------------------------------------
    Formula block
    ------------------------------------------------------------------------- */
 .formula{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px, 6vw, 96px);align-items:center}
@@ -458,7 +493,7 @@ strong{font-weight:700}
 .footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid var(--line-dark)}
 .footer__logo{width:200px;margin-bottom:18px}
 .footer p{color:var(--grey-2);font-size:14.5px;max-width:34ch}
-.footer h4{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:18px;font-family:var(--font-body);font-weight:700}
+.footer h2{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:18px;font-family:var(--font-body);font-weight:700}
 .footer li{padding:6px 0;font-size:15px}
 .footer li a{transition:color .3s}
 .footer li a:hover{color:var(--gold-ink)}

@@ -71,7 +71,7 @@
             "name": "How much employee time does Level Set take?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Four hours. The six modules can run as a single half-day session or be split across two sessions to fit your onboarding schedule."
+              "text": "Four hours in total: six live sessions of 45 to 60 minutes each, one module per session. If you'd rather do it all at once, we can expand it into a full-day workshop."
             }
           },
           {
@@ -87,7 +87,31 @@
             "name": "Is this in person or virtual?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Both. We deliver in person at your offices or virtually for distributed teams. Most organizations choose in person for the dining and presence modules where possible."
+              "text": "Live and in person is our first choice, and it's where the program works best. We can adapt it for Zoom or video delivery when your people are remote."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many people are in a cohort?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "20 to 25. Small enough that everyone in the room takes part."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work with universities?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Level Set is one program with two audiences. For employers, we teach new hires already on the job. For universities, we teach rising seniors and graduating students before they start. The modules are adapted to fit the room."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does Level Set cost?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pricing depends on cohort size, delivery format and audience. Tell us what you have in mind and we'll come back with a number."
             }
           },
           {
@@ -170,24 +194,34 @@
         <dl>
           <div><dt>Email</dt><dd><a href="mailto:contact@levelsetmethod.com">contact@levelsetmethod.com</a></dd></div>
           <div><dt>Consult</dt><dd>30 minutes, virtual, no cost</dd></div>
-          <div><dt>Delivery</dt><dd>In person or virtual, nationwide</dd></div>
+          <div><dt>Delivery</dt><dd>Live on-site preferred, virtual available</dd></div>
         </dl>
       </aside>
       <div class="reveal">
-        <form class="form" data-form name="consult" method="POST" action="thank-you.html" data-netlify="true" netlify-honeypot="company-website">
-          <input type="hidden" name="form-name" value="consult">
-          <p class="hp"><label>Leave this empty <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+        <!-- Formspree (LWS account), delivers to contact@levelsetmethod.com.
+             FORMSPREE_ID is a placeholder: Jon supplies the real form ID at go-live. -->
+        <form class="form" data-form name="consult" method="POST" action="https://formspree.io/f/FORMSPREE_ID">
+          <input type="hidden" name="_subject" value="Level Set consult request">
+          <p class="hp"><label>Leave this empty <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+          <div class="field full"><label for="inquiry">I'm inquiring for</label>
+            <select id="inquiry" name="inquiring_for" required>
+              <option value="">Select one</option>
+              <option>An employer</option>
+              <option>A university</option>
+              <option>Other</option>
+            </select>
+          </div>
           <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" required autocomplete="name"></div>
           <div class="field"><label for="title">Title</label><input id="title" name="title" type="text" autocomplete="organization-title"></div>
           <div class="field"><label for="company">Organization</label><input id="company" name="company" type="text" required autocomplete="organization"></div>
           <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
-          <div class="field"><label for="size">Employees you have in mind</label>
+          <div class="field"><label for="size">How many people</label>
             <select id="size" name="cohort">
               <option value="">Select one</option>
-              <option>1 to 10</option>
-              <option>11 to 25</option>
-              <option>26 to 50</option>
-              <option>More than 50</option>
+              <option>Up to 25 (one cohort)</option>
+              <option>26 to 50 (two cohorts)</option>
+              <option>51 to 100</option>
+              <option>More than 100</option>
               <option>Not sure yet</option>
             </select>
           </div>
@@ -199,7 +233,7 @@
               <option>Exploring for later</option>
             </select>
           </div>
-          <div class="field full"><label for="message">Anything we should know</label><textarea id="message" name="message" placeholder="Who are the employees you are thinking about, and what would you like to see change?"></textarea></div>
+          <div class="field full"><label for="message">Anything we should know</label><textarea id="message" name="message" placeholder="Who are the people you are thinking about, and what would you like to see change?"></textarea></div>
           <p class="form__note">We will only use your details to reply to you. See our <a href="privacy.html" style="text-decoration:underline">privacy note</a>.</p>
           <div class="full"><button class="btn btn--gold" type="submit">Request the consult <span class="arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></button></div>
         </form>
@@ -219,11 +253,14 @@
       <h2 class="h-l">Before you <span class="serif gold">book.</span></h2>
     </div>
     <div class="faq reveal">
-      <details><summary>How much employee time does Level Set take? <i></i></summary><p>Four hours. The six modules can run as a single half-day session or be split across two sessions to fit your onboarding schedule.</p></details>
+      <details><summary>How much employee time does Level Set take? <i></i></summary><p>Four hours in total: six live sessions of 45 to 60 minutes each, one module per session. If you'd rather do it all at once, we can expand it into a full-day workshop.</p></details>
       <details><summary>Who delivers the program? <i></i></summary><p>Dr. Rosalind Cohen and Clinton Kelly deliver every session personally. There is no bench of facilitators; you get the two people who built the curriculum.</p></details>
-      <details><summary>Is this in person or virtual? <i></i></summary><p>Both. We deliver in person at your offices or virtually for distributed teams. Most organizations choose in person for the dining and presence modules where possible.</p></details>
+      <details><summary>Is this in person or virtual? <i></i></summary><p>Live and in person is our first choice, and it's where the program works best. We can adapt it for Zoom or video delivery when your people are remote.</p></details>
+      <details><summary>How many people are in a cohort? <i></i></summary><p>20 to 25. Small enough that everyone in the room takes part.</p></details>
+      <details><summary>Do you work with universities? <i></i></summary><p>Yes. Level Set is one program with two audiences. For employers, we teach new hires already on the job. For universities, we teach rising seniors and graduating students before they start. The modules are adapted to fit the room.</p></details>
+      <details><summary>What does Level Set cost? <i></i></summary><p>Pricing depends on cohort size, delivery format and audience. Tell us what you have in mind and we'll come back with a number.</p></details>
       <details><summary>Is Level Set a compliance program? <i></i></summary><p>No. We can't manage compliance for you, and we don't try. Level Set covers the other three Cs of onboarding: clarification, culture and connection. The result is confidence.</p></details>
-      <details><summary>Which employees benefit most? <i></i></summary><p>Early-career hires, technically gifted employees whose communication skills need to catch up to their analytical strengths, professionals without inherited corporate fluency and anyone moving into a formal corporate setting from academic, creative, nonprofit, military or entrepreneurial environments.</p></details>
+      <details><summary>Which employees benefit most? <i></i></summary><p>Early-career hires, technically gifted employees whose communication skills need to catch up to their analytical strengths, professionals without "Inherited Corporate Fluency<sup class="tm">&trade;</sup>" and anyone moving into a formal corporate setting from academic, creative, nonprofit, military or entrepreneurial environments.</p></details>
       <details><summary>How is the program tailored? <i></i></summary><p>Before delivery we learn your dress norms, your meeting culture and how your organization handles disagreement, and we adjust the examples so the program sounds like your company.</p></details>
     </div>
   </div>
@@ -233,36 +270,36 @@
   <div class="container">
     <div class="footer__grid">
       <div>
-        <img class="footer__logo" src="logo/levelset_logo_white.png" alt="Level Set" width="1058" height="236">
+        <img class="footer__logo" src="logo/levelset_logo_white.png" alt="Level Set" width="1058" height="236" loading="lazy">
         <p>Six modules on the unwritten rules of professional success. Prepared professionals. Stronger organizations.</p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h2>Explore</h2>
         <ul>
           <li><a href="program.html">THE PROGRAM</a></li>
-          <li><a href="program.html#modules">The Six Modules</a></li>
-          <li><a href="program.html#pause">The P.A.U.S.E. Method</a></li>
+          <li><a href="program.html#modules">THE SIX MODULES</a></li>
+          <li><a href="program.html#pause">THE P.A.U.S.E. METHOD</a></li>
           <li><a href="about.html">WHO WE ARE</a></li>
         </ul>
       </div>
       <div>
-        <h4>Company</h4>
+        <h2>Company</h2>
         <ul>
           <li><a href="contact.html">CONTACT</a></li>
-          <li><a href="contact.html#faq">Questions</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="contact.html#faq">QUESTIONS</a></li>
+          <li><a href="privacy.html">PRIVACY</a></li>
         </ul>
       </div>
       <div>
-        <h4>Reach us</h4>
+        <h2>Reach us</h2>
         <ul>
           <li><a href="mailto:contact@levelsetmethod.com">contact@levelsetmethod.com</a></li>
-          <li><a href="contact.html">Book a 30-minute consult</a></li>
+          <li><a href="contact.html">BOOK A 30-MINUTE CONSULT</a></li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>&copy; <span data-year>2026</span> Level Set. All rights reserved. "Inherited corporate fluency" &copy; Level Set.</span>
+      <span>&copy; <span data-year>2026</span> Level Set. All rights reserved. Inherited Corporate Fluency&trade; and P.A.U.S.E.&trade; are trademarks of Level Set.</span>
       <span>Site by <a href="https://livewebstudios.com" rel="noopener">Live Web Studios</a></span>
     </div>
   </div>
