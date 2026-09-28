@@ -42,7 +42,7 @@
     const texts = [...heroEl.querySelectorAll('.hero__text-item')];
     const dots = [...heroEl.querySelectorAll('.dot')];
     const counter = heroEl.querySelector('.hero__meta .num');
-    const DUR = 8000;
+    const DUR = 5500;
     heroEl.style.setProperty('--slide-dur', DUR + 'ms');
     let i = 0, timer = null, paused = false, userPaused = false;
     const pauseBtn = heroEl.querySelector('.hero__pause');
@@ -134,6 +134,100 @@
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ---------------- Level-tool eyebrow marks ---------------- */
+  // Replays each time an eyebrow enters the viewport; resets once it has fully left.
+  if (document.body.classList.contains('levels')) {
+    const eyebrows = document.querySelectorAll('.eyebrow, .level-mark');
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const lio = new IntersectionObserver((entries) => {
+        entries.forEach(en => en.target.classList.toggle('is-leveled', en.isIntersecting));
+      }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+      eyebrows.forEach(el => lio.observe(el));
+    } else {
+      eyebrows.forEach(el => el.classList.add('is-leveled'));
+    }
+  }
+
+  /* ---------------- FAQ decode ---------------- */
+  // Each question resolves from scrambled glyphs, staggered, the first time the
+  // list scrolls into view. Screen readers get the real text via .sr-only.
+  const faq = document.querySelector('.faq');
+  if (faq) {
+    const GLYPHS = '01<>/_#*+=:;[]{}';
+    const items = [...faq.querySelectorAll('summary')].map(sm => {
+      const node = [...sm.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if (!node) return null;
+      const text = node.textContent.trim();
+      const real = document.createElement('span'); real.className = 'sr-only'; real.textContent = text;
+      const vis = document.createElement('span'); vis.className = 'faq__q'; vis.setAttribute('aria-hidden', 'true'); vis.textContent = text;
+      node.replaceWith(real, vis);
+      return { vis, text };
+    }).filter(Boolean);
+    const decode = ({ vis, text }, delay) => {
+      const D = 650, t0 = performance.now() + delay;
+      vis.classList.add('is-decoding');
+      const tick = (t) => {
+        const k = Math.max(0, Math.min(1, (t - t0) / D));
+        const n = Math.floor(text.length * k);
+        vis.textContent = text.slice(0, n) + [...text.slice(n)].map(c => c === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]).join('');
+        if (k < 1) requestAnimationFrame(tick); else { vis.textContent = text; vis.classList.remove('is-decoding'); }
+      };
+      requestAnimationFrame(tick);
+    };
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const fio = new IntersectionObserver((entries) => {
+        if (!entries.some(en => en.isIntersecting)) return;
+        items.forEach((it, k) => decode(it, k * 90));
+        fio.disconnect();
+      }, { threshold: 0.2 });
+      fio.observe(faq);
+    }
+
+    // Opened answers type out one line at a time: words are grouped by the
+    // line they render on, each line sweeps in left to right, then the next.
+    const LINE = 420;
+    faq.querySelectorAll('details').forEach(d => {
+      const p = d.querySelector('p');
+      if (!p || reduceMotion) return;
+      const wrap = (node) => {
+        [...node.childNodes].forEach(child => {
+          if (child.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach(part => {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+              const w = document.createElement('span'); w.className = 'faq__w'; w.textContent = part; frag.appendChild(w);
+            });
+            child.replaceWith(frag);
+          } else if (child.nodeType === 1 && !child.classList.contains('faq__w')) {
+            child.classList.add('faq__w');
+          }
+        });
+      };
+      wrap(p);
+      const words = [...p.querySelectorAll('.faq__w')];
+      d.addEventListener('toggle', () => {
+        if (!d.open) { p.classList.remove('is-typing'); return; }
+        p.classList.remove('is-typing');
+        words.forEach(w => { w.style.transitionDelay = ''; });
+        const rows = [];
+        words.forEach(w => {
+          const top = w.offsetTop;
+          let row = rows.find(r => Math.abs(r.top - top) < 4);
+          if (!row) rows.push(row = { top, words: [] });
+          row.words.push(w);
+        });
+        rows.sort((a, b) => a.top - b.top);
+        const pw = p.clientWidth || 1;
+        rows.forEach((r, i) => r.words.forEach(w => {
+          w.style.transitionDelay = Math.round(i * LINE + (w.offsetLeft / pw) * LINE) + 'ms';
+        }));
+        void p.offsetWidth;
+        p.classList.add('is-typing');
+      });
+    });
   }
 
   /* ---------------- Subtle parallax on section backgrounds ---------------- */

@@ -19,13 +19,15 @@
   --line:rgba(13,13,13,.10);
   --line-dark:rgba(250,248,245,.12);
 
-  --font-display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
-  --font-body:"Manrope", "Helvetica Neue", Arial, sans-serif;
+  /* System sans (San Francisco on Apple, Segoe UI on Windows). Approved
+     2026-09-27 from the theme.css preview. */
+  --font-display:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif:"Instrument Serif", Georgia, "Times New Roman", serif;
 
   --max:1280px;
   --gutter:clamp(20px, 4vw, 56px);
-  --radius:6px;
+  --radius:8px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
   --dur:.7s;
@@ -95,6 +97,37 @@ strong{font-weight:700}
   color:var(--gold-ink);margin-bottom:22px;
 }
 .eyebrow::before{content:"";width:28px;height:1px;background:var(--gold)}
+/* Level-tool mark (Home for now; add class="levels" to <body> to enable on a
+   page). Replaces the hairline with a thin spirit level that rocks up and down
+   and settles level each time the eyebrow scrolls into view. main.js toggles
+   .is-leveled; no-JS and reduced motion show it at rest. */
+.levels{--level-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='%23000' stroke-width='1'%3E%3Crect x='.5' y='2' width='39' height='8' rx='1.6'/%3E%3Crect x='14.5' y='4' width='11' height='4' rx='2'/%3E%3Cpath d='M18 4v4M22 4v4' stroke-width='.6'/%3E%3Ccircle cx='20' cy='6' r='1.1' fill='%23000' stroke='none'/%3E%3Cpath d='M4 4.5v3M36 4.5v3' stroke-width='.6'/%3E%3C/svg%3E")}
+.levels .eyebrow::before,
+.levels .level-mark{
+  width:40px;height:12px;background:var(--gold);
+  -webkit-mask:var(--level-mask) center/contain no-repeat;
+          mask:var(--level-mask) center/contain no-repeat;
+  opacity:0;transform-origin:50% 50%;
+}
+/* Larger mark under the footer consult link. Present in every footer, shown
+   only on .levels pages. */
+.level-mark{display:none}
+.levels .level-mark{display:block;width:120px;height:36px;margin-top:18px;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='%23000' stroke-width='.42'%3E%3Crect x='.3' y='2' width='39.4' height='8' rx='1.4'/%3E%3Crect x='14.5' y='4' width='11' height='4' rx='2'/%3E%3Cpath d='M18 4v4M22 4v4M4 4.5v3M36 4.5v3M8 5.2v1.6M32 5.2v1.6' stroke-width='.3'/%3E%3Ccircle cx='20' cy='6' r='.9' fill='%23000' stroke='none'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' fill='none' stroke='%23000' stroke-width='.42'%3E%3Crect x='.3' y='2' width='39.4' height='8' rx='1.4'/%3E%3Crect x='14.5' y='4' width='11' height='4' rx='2'/%3E%3Cpath d='M18 4v4M22 4v4M4 4.5v3M36 4.5v3M8 5.2v1.6M32 5.2v1.6' stroke-width='.3'/%3E%3Ccircle cx='20' cy='6' r='.9' fill='%23000' stroke='none'/%3E%3C/svg%3E")}
+/* Set down, rocks like a carpenter settling it, comes to level. */
+.levels .eyebrow.is-leveled::before,
+.levels .level-mark.is-leveled{opacity:1;animation:level-settle 2s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes level-settle{
+  0%{opacity:0;transform:rotate(-22deg)}
+  10%{opacity:1}
+  22%{transform:rotate(17deg)}
+  40%{transform:rotate(-11deg)}
+  58%{transform:rotate(6deg)}
+  74%{transform:rotate(-2.5deg)}
+  88%{transform:rotate(1deg)}
+  100%{opacity:1;transform:rotate(0)}
+}
+html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;transform:none;animation:none}
 .h-xl{font-size:clamp(40px, 6vw, 84px)}
 .h-l{font-size:clamp(34px, 4.6vw, 62px)}
 .h-m{font-size:clamp(26px, 3vw, 40px)}
@@ -198,9 +231,9 @@ strong{font-weight:700}
    ------------------------------------------------------------------------- */
 .hero{position:relative;height:100svh;min-height:640px;max-height:1100px;background:var(--black);color:var(--cream);overflow:hidden}
 .hero__slides{position:absolute;inset:0}
-.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s var(--ease);will-change:opacity}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s var(--ease);will-change:opacity}
 .slide.is-active{opacity:1;z-index:1}
-.slide__img{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform var(--slide-dur, 8s) linear}
+.slide__img{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform var(--slide-dur, 5.5s) linear}
 .slide.is-active .slide__img{transform:scale(1)}
 .slide::after{
   content:"";position:absolute;inset:0;
@@ -229,7 +262,7 @@ strong{font-weight:700}
 .hero__dots{display:flex;gap:10px}
 .dot{width:56px;height:3px;background:rgba(250,248,245,.28);border-radius:2px;position:relative;overflow:hidden;padding:0}
 .dot::after{content:"";position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left}
-.dot.is-active::after{animation:dotfill var(--slide-dur, 8s) linear forwards}
+.dot.is-active::after{animation:dotfill var(--slide-dur, 5.5s) linear forwards}
 .hero.is-paused .dot.is-active::after{animation-play-state:paused}
 .hero__pause{width:32px;height:32px;border-radius:50%;border:1px solid rgba(250,248,245,.35);display:grid;place-items:center;color:var(--cream);transition:border-color .3s var(--ease), background .3s var(--ease)}
 .hero__pause:hover{border-color:var(--gold);background:rgba(250,248,245,.08)}
@@ -534,6 +567,24 @@ strong{font-weight:700}
 .faq details[open] summary i::before,.faq details[open] summary i::after{background:var(--black)}
 .faq details[open] summary i::after{transform:translate(-50%,-50%) rotate(90deg)}
 .faq details p{padding:0 0 26px;color:var(--grey);max-width:66ch}
+/* Techie layer: mono question index, questions decode in from scrambled
+   glyphs when the list scrolls into view (main.js), and an opened answer
+   wipes in behind a gold scan line. Reduced motion: none of it moves. */
+.faq{counter-reset:faq}
+.faq details{position:relative;counter-increment:faq}
+.faq summary::before{content:"Q." counter(faq, decimal-leading-zero);flex:none;width:3.4em;font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace;font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--gold-ink);align-self:center}
+.faq summary{justify-content:flex-start}
+.faq summary i{margin-left:auto}
+.faq__q{flex:1}
+.faq__q.is-decoding{color:var(--grey)}
+.faq details p{margin-left:calc(3.4em * 12 / 17)}
+.faq details[open]::after{content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:linear-gradient(90deg, transparent, var(--gold) 45%, var(--gold-2) 50%, transparent 55%);background-size:220% 100%;animation:faq-scan .9s var(--ease-out) forwards;pointer-events:none}
+@keyframes faq-scan{from{background-position:100% 0;opacity:1}to{background-position:0 0;opacity:0}}
+/* Answer types out line by line (main.js sets each word's delay). */
+.faq__w{opacity:0;transition:opacity .14s linear}
+.faq p.is-typing .faq__w{opacity:1}
+html.no-js .faq__w{opacity:1}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* -------------------------------------------------------------------------
    Footer
@@ -583,6 +634,8 @@ html.no-js .formula__line{opacity:1;transform:none}
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
   .reveal,.reveal-stagger > *,.formula__line{opacity:1;transform:none}
   .reveal-lines .word > span{transform:none}
+  .levels .eyebrow::before,.levels .level-mark{opacity:1;transform:none;animation:none !important}
+  .faq__w{opacity:1}
   .slide__img{transform:none}
   .strip__track{animation:none}
   .hero__pause{display:none}
@@ -595,3 +648,40 @@ html.no-js .formula__line{opacity:1;transform:none}
 .skip{position:absolute;left:-9999px;top:10px;z-index:200;background:var(--gold);color:var(--black);padding:10px 14px;border-radius:var(--radius);font-weight:700}
 .skip:focus{left:10px}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* -------------------------------------------------------------------------
+   Theme layer (from theme.css, approved 2026-09-27): type scale, pill
+   buttons, soft shadows. Brand colors unchanged.
+   ------------------------------------------------------------------------- */
+body{font-size:16px}
+.hero__title{font-size:clamp(40px, 5vw, 54px);letter-spacing:-1.08px;line-height:1.1;max-width:16ch}
+.h-xl{font-size:clamp(38px, 4.4vw, 54px);letter-spacing:-1.08px;line-height:1.1}
+.h-l{font-size:clamp(34px, 3.8vw, 48px);letter-spacing:-.96px;line-height:1.1}
+.h-m{font-size:clamp(30px, 3.2vw, 40px);letter-spacing:-.8px;line-height:1.1}
+.h-s,.card h3,.module h3{font-size:27px;letter-spacing:-1.08px;line-height:1.3}
+.lead,.hero__copy,.page-hero__lede{font-size:18px;letter-spacing:-.18px;line-height:1.4}
+.formula__line{font-size:clamp(28px, 3.6vw, 48px)}
+.stat__num{font-size:clamp(44px, 4.6vw, 64px)}
+.card,.form,.step,.proof__item{box-shadow:rgba(0,0,0,.05) 0 1px 8px 0}
+.card:hover{box-shadow:rgba(0,0,0,.08) 0 1px 1px 0, rgba(0,0,0,.08) 0 4px 5px 0}
+.btn{border-radius:50.5px}
+
+/* Contact form contrast (2026-09-27): darker warm panel with white fields,
+   field borders at 3.5:1 against white (WCAG non-text minimum is 3:1),
+   labels in ink instead of grey. */
+.form{background:#e6e0d5;border-color:rgba(13,13,13,.18);box-shadow:rgba(0,0,0,.06) 0 2px 4px 0, rgba(0,0,0,.07) 0 12px 32px -12px}
+.field label{color:var(--ink)}
+.field input,.field select,.field textarea{background:#fff;border:1px solid #8f8a83}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--ink)}
+.field input::placeholder,.field textarea::placeholder{color:#76716b;opacity:1}
+.form__note{color:#5c5853}
+
+/* FAQ contrast (2026-09-27): each question is a white card on the cream
+   section instead of a hairline row. */
+.faq{display:grid;gap:12px}
+.faq details,.faq details:last-child{background:#fff;border:1px solid rgba(13,13,13,.16);border-radius:var(--radius);padding:0 clamp(18px, 2.4vw, 28px);box-shadow:rgba(0,0,0,.05) 0 1px 8px 0;overflow:hidden;transition:border-color .3s var(--ease), box-shadow .3s var(--ease)}
+.faq details:hover{border-color:rgba(13,13,13,.34)}
+.faq details[open]{border-color:var(--gold);box-shadow:rgba(0,0,0,.08) 0 1px 1px 0, rgba(0,0,0,.08) 0 4px 5px 0}
+.faq summary{color:var(--ink);padding:22px 0}
+.faq details p{color:#4f4b46}
+.faq details[open]::after{top:0}
