@@ -603,6 +603,12 @@ html.no-js .faq__w{opacity:1}
 .footer li a:hover{color:var(--gold-ink)}
 .footer__bottom{display:flex;justify-content:space-between;gap:20px;padding-top:26px;font-size:13px;color:var(--grey-2);flex-wrap:wrap}
 .footer__bottom a:hover{color:var(--gold-ink)}
+.footer-lws{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.footer-badge{display:inline-block;line-height:0}
+.footer-badge img{width:150px;height:37px}
+.footer-credit{font-size:.8125rem;color:rgba(255,255,255,.65)}
+.footer-credit a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.footer-credit a:hover,.footer-credit a:focus-visible{color:#fff}
 .footer__word{position:absolute;right:-1%;bottom:-6%;font-family:var(--font-display);font-weight:700;font-size:clamp(120px, 22vw, 300px);letter-spacing:-.05em;color:rgba(250,248,245,.025);line-height:1;pointer-events:none;user-select:none}
 @media (max-width:900px){.footer__grid{grid-template-columns:1fr 1fr}}
 @media (max-width:520px){.footer__grid{grid-template-columns:1fr}}
