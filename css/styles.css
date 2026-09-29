@@ -327,8 +327,8 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
 /* -------------------------------------------------------------------------
    Stats
    ------------------------------------------------------------------------- */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);border-radius:var(--radius);overflow:hidden}
-.stat{background:var(--black);padding:clamp(28px, 3vw, 44px)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.stat{background:var(--black);border:1px solid var(--line-dark);border-radius:var(--radius);padding:clamp(28px, 3vw, 44px)}
 .stat__num{font-family:var(--font-display);font-size:clamp(48px, 5.5vw, 84px);font-weight:600;line-height:1;color:var(--gold-ink);letter-spacing:-.02em}
 .stat__num sup{font-size:.4em;vertical-align:top;top:.35em;position:relative}
 .stat__label{margin-top:14px;font-size:15px;color:var(--grey-2);max-width:26ch}
@@ -379,6 +379,37 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
 .cards--two .card p{font-size:16px}
 .audience-note{margin-top:28px;text-align:center;color:var(--grey);font-size:15px}
 @media (max-width:760px){.cards--two{grid-template-columns:1fr}}
+/* Drafting-grid background (Audiences). Hairline squares that fade out toward
+   the edges so the grid reads as paper, not a table. */
+.section--grid{overflow:clip}
+.section--grid::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px, transparent 1px),linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:56px 56px;background-position:center top;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%, #000 30%, transparent 100%);
+          mask-image:radial-gradient(ellipse 75% 70% at 50% 45%, #000 30%, transparent 100%);
+}
+/* Cards on grid sections lift off the paper: white face, firmer edge, soft
+   shadow, so they no longer read as the same cream as the background. */
+.section--grid .card,.section--grid .step{background:#fff;border-color:rgba(13,13,13,.14);box-shadow:0 1px 2px rgba(13,13,13,.04), 0 18px 36px -24px rgba(13,13,13,.28)}
+.section--grid .step:hover{border-color:rgba(199,153,55,.6);box-shadow:0 1px 2px rgba(13,13,13,.04), 0 24px 44px -24px rgba(13,13,13,.34)}
+.section--grid .card:hover{border-color:transparent;box-shadow:0 30px 50px -30px rgba(0,0,0,.35)}
+/* Card sets that rock and settle level (Audiences, Stats), the same motion as
+   the level mark in the eyebrows, at card-sized angles. main.js toggles
+   .is-rocking each time the set scrolls into view; fill is backwards only so
+   hover still works after. */
+.rock.is-rocking > *{animation:card-settle 2s cubic-bezier(.36,.07,.19,.97) backwards}
+/* Contact form: only the fields rock, not the note or the button. */
+.form.rock.is-rocking > :not(.field){animation:none}
+@keyframes card-settle{
+  0%{transform:rotate(-5deg)}
+  22%{transform:rotate(4deg)}
+  40%{transform:rotate(-2.6deg)}
+  58%{transform:rotate(1.4deg)}
+  74%{transform:rotate(-.6deg)}
+  88%{transform:rotate(.25deg)}
+  100%{transform:rotate(0)}
+}
 
 /* -------------------------------------------------------------------------
    Delivery (headline stat + four facts)
@@ -434,8 +465,18 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
 
 /* PAUSE method */
 .pause{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.pause__item{padding:32px 24px;border:1px solid var(--line-dark);border-radius:var(--radius);background:rgba(250,248,245,.03);transition:background .5s var(--ease), transform .5s var(--ease)}
-.pause__item:hover{background:rgba(199,153,55,.08);transform:translateY(-4px)}
+/* Glass cards: the hills behind blur and bend through a clear pane, with a
+   lit top edge and a diagonal sheen so it reads as glass, not a tint. */
+.pause__item{position:relative;overflow:hidden;isolation:isolate;padding:32px 24px;
+  border:1px solid rgba(250,248,245,.16);border-radius:var(--radius);
+  background:linear-gradient(145deg, rgba(250,248,245,.10) 0%, rgba(250,248,245,.03) 45%, rgba(250,248,245,.06) 100%);
+  -webkit-backdrop-filter:blur(14px) saturate(150%) brightness(1.08);
+          backdrop-filter:blur(14px) saturate(150%) brightness(1.08);
+  box-shadow:inset 0 1px 0 rgba(250,248,245,.22), inset 0 -1px 0 rgba(0,0,0,.25), 0 24px 48px -28px rgba(0,0,0,.6);
+  transition:background .5s var(--ease), transform .5s var(--ease), border-color .5s var(--ease)}
+.pause__item::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(115deg, transparent 30%, rgba(250,248,245,.09) 42%, transparent 55%, transparent 70%, rgba(250,248,245,.05) 78%, transparent 86%)}
+.pause__item:hover{background:linear-gradient(145deg, rgba(199,153,55,.16) 0%, rgba(250,248,245,.04) 50%, rgba(199,153,55,.08) 100%);border-color:rgba(199,153,55,.35);transform:translateY(-4px)}
 .pause__letter{font-family:var(--font-display);font-size:clamp(56px, 6vw, 96px);font-weight:700;line-height:1;color:var(--gold-ink);letter-spacing:-.03em}
 .pause__word{font-size:18px;font-weight:700;margin-top:6px}
 .pause__desc{font-size:14px;color:var(--grey-2);margin-top:10px}
@@ -645,6 +686,7 @@ html.no-js .formula__line{opacity:1;transform:none}
   .reveal,.reveal-stagger > *,.formula__line{opacity:1;transform:none}
   .reveal-lines .word > span{transform:none}
   .levels .eyebrow::before,.levels .level-mark{opacity:1;transform:none;animation:none !important}
+  .rock > *{animation:none !important}
   .faq__w{opacity:1}
   .slide__img{transform:none}
   .strip__track{animation:none}

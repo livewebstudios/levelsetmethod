@@ -150,6 +150,16 @@
     }
   }
 
+  /* ---------------- Card rock ---------------- */
+  // Card sets rock and settle level each time they come into view; reset once fully gone.
+  document.querySelectorAll('.rock').forEach(el => {
+    if (!('IntersectionObserver' in window) || reduceMotion) return;
+    new IntersectionObserver(([en]) => {
+      if (en.intersectionRatio >= 0.35) el.classList.add('is-rocking');
+      else if (!en.isIntersecting) el.classList.remove('is-rocking');
+    }, { threshold: [0, 0.35] }).observe(el);
+  });
+
   /* ---------------- FAQ decode ---------------- */
   // Each question resolves from scrambled glyphs, staggered, the first time the
   // list scrolls into view. Screen readers get the real text via .sr-only.
