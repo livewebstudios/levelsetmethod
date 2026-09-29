@@ -398,16 +398,25 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
    the level mark in the eyebrows, at card-sized angles. main.js toggles
    .is-rocking each time the set scrolls into view; fill is backwards only so
    hover still works after. */
-.rock.is-rocking > *{animation:card-settle 2s cubic-bezier(.36,.07,.19,.97) backwards}
+.rock.is-rocking > *{animation:card-settle var(--rock-d,2s) cubic-bezier(.36,.07,.19,.97) var(--rock-delay,0s) backwards}
 /* Contact form: only the fields rock, not the note or the button. */
 .form.rock.is-rocking > :not(.field){animation:none}
+/* Each item gets its own start angle, direction and timing so a set never
+   moves in lockstep. Pattern repeats every 7 items. */
+.rock > *:nth-child(7n+1){--rock-a:-5deg;--rock-d:2s;--rock-delay:0s}
+.rock > *:nth-child(7n+2){--rock-a:3.6deg;--rock-d:1.8s;--rock-delay:.08s}
+.rock > *:nth-child(7n+3){--rock-a:-2.4deg;--rock-d:2.2s;--rock-delay:.03s}
+.rock > *:nth-child(7n+4){--rock-a:6deg;--rock-d:1.9s;--rock-delay:.12s}
+.rock > *:nth-child(7n+5){--rock-a:-3.8deg;--rock-d:2.1s;--rock-delay:.05s}
+.rock > *:nth-child(7n+6){--rock-a:2.8deg;--rock-d:2.3s;--rock-delay:.1s}
+.rock > *:nth-child(7n+7){--rock-a:-6deg;--rock-d:1.85s;--rock-delay:.02s}
 @keyframes card-settle{
-  0%{transform:rotate(-5deg)}
-  22%{transform:rotate(4deg)}
-  40%{transform:rotate(-2.6deg)}
-  58%{transform:rotate(1.4deg)}
-  74%{transform:rotate(-.6deg)}
-  88%{transform:rotate(.25deg)}
+  0%{transform:rotate(var(--rock-a,-5deg))}
+  22%{transform:rotate(calc(var(--rock-a,-5deg) * -.8))}
+  40%{transform:rotate(calc(var(--rock-a,-5deg) * .52))}
+  58%{transform:rotate(calc(var(--rock-a,-5deg) * -.28))}
+  74%{transform:rotate(calc(var(--rock-a,-5deg) * .12))}
+  88%{transform:rotate(calc(var(--rock-a,-5deg) * -.05))}
   100%{transform:rotate(0)}
 }
 
