@@ -389,6 +389,16 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
   -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%, #000 30%, transparent 100%);
           mask-image:radial-gradient(ellipse 75% 70% at 50% 45%, #000 30%, transparent 100%);
 }
+/* Same drafting grid laid over every hero photo, in light lines so the image
+   still reads through. Sits above the photo and scrim, below the text. */
+.hero__slides{z-index:0}
+.hero::before,.page-hero::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:linear-gradient(rgba(250,248,245,.08) 1px, transparent 1px),linear-gradient(90deg, rgba(250,248,245,.08) 1px, transparent 1px);
+  background-size:56px 56px;background-position:center top;
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 45%, #000 35%, transparent 100%);
+          mask-image:radial-gradient(ellipse 80% 80% at 50% 45%, #000 35%, transparent 100%);
+}
 /* Cards on grid sections lift off the paper: white face, firmer edge, soft
    shadow, so they no longer read as the same cream as the background. */
 .section--grid .card,.section--grid .step{background:#fff;border-color:rgba(13,13,13,.14);box-shadow:0 1px 2px rgba(13,13,13,.04), 0 18px 36px -24px rgba(13,13,13,.28)}
@@ -399,6 +409,10 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
    .is-rocking each time the set scrolls into view; fill is backwards only so
    hover still works after. */
 .rock.is-rocking > *{animation:card-settle var(--rock-d,2s) cubic-bezier(.36,.07,.19,.97) var(--rock-delay,0s) backwards}
+/* Staff photos: a lighter single-element sway on view, alternating direction. */
+.sway{--rock-a:-2deg;--rock-d:2.2s}
+.sway--alt{--rock-a:1.6deg;--rock-d:2s;--rock-delay:.1s}
+.sway.is-rocking{animation:card-settle var(--rock-d) cubic-bezier(.36,.07,.19,.97) var(--rock-delay,0s) backwards}
 /* Contact form: only the fields rock, not the note or the button. */
 .form.rock.is-rocking > :not(.field){animation:none}
 /* Each item gets its own start angle, direction and timing so a set never
@@ -695,7 +709,7 @@ html.no-js .formula__line{opacity:1;transform:none}
   .reveal,.reveal-stagger > *,.formula__line{opacity:1;transform:none}
   .reveal-lines .word > span{transform:none}
   .levels .eyebrow::before,.levels .level-mark{opacity:1;transform:none;animation:none !important}
-  .rock > *{animation:none !important}
+  .rock > *,.sway{animation:none !important}
   .faq__w{opacity:1}
   .slide__img{transform:none}
   .strip__track{animation:none}

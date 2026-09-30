@@ -151,8 +151,8 @@
   }
 
   /* ---------------- Card rock ---------------- */
-  // Card sets rock and settle level each time they come into view; reset once fully gone.
-  document.querySelectorAll('.rock').forEach(el => {
+  // Card sets and staff photos rock and settle level each time they come into view; reset once fully gone.
+  document.querySelectorAll('.rock, .sway').forEach(el => {
     if (!('IntersectionObserver' in window) || reduceMotion) return;
     new IntersectionObserver(([en]) => {
       if (en.intersectionRatio >= 0.35) el.classList.add('is-rocking');
