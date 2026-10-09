@@ -498,26 +498,6 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
 .module-row .checklist{margin-top:18px}
 @media (max-width:900px){.module-row{grid-template-columns:1fr}.module-row__num{position:static}}
 
-/* PAUSE method */
-.pause{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-/* Glass cards: the hills behind blur and bend through a clear pane, with a
-   lit top edge and a diagonal sheen so it reads as glass, not a tint. */
-.pause__item{position:relative;overflow:hidden;isolation:isolate;padding:32px 24px;
-  border:1px solid rgba(250,248,245,.16);border-radius:var(--radius);
-  background:linear-gradient(145deg, rgba(250,248,245,.10) 0%, rgba(250,248,245,.03) 45%, rgba(250,248,245,.06) 100%);
-  -webkit-backdrop-filter:blur(14px) saturate(150%) brightness(1.08);
-          backdrop-filter:blur(14px) saturate(150%) brightness(1.08);
-  box-shadow:inset 0 1px 0 rgba(250,248,245,.22), inset 0 -1px 0 rgba(0,0,0,.25), 0 24px 48px -28px rgba(0,0,0,.6);
-  transition:background .5s var(--ease), transform .5s var(--ease), border-color .5s var(--ease)}
-.pause__item::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(115deg, transparent 30%, rgba(250,248,245,.09) 42%, transparent 55%, transparent 70%, rgba(250,248,245,.05) 78%, transparent 86%)}
-.pause__item:hover{background:linear-gradient(145deg, rgba(199,153,55,.16) 0%, rgba(250,248,245,.04) 50%, rgba(199,153,55,.08) 100%);border-color:rgba(199,153,55,.35);transform:translateY(-4px)}
-.pause__letter{font-family:var(--font-display);font-size:clamp(56px, 6vw, 96px);font-weight:700;line-height:1;color:var(--gold-ink);letter-spacing:-.03em}
-.pause__word{font-size:18px;font-weight:700;margin-top:6px}
-.pause__desc{font-size:14px;color:var(--grey-2);margin-top:10px}
-@media (max-width:900px){.pause{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:500px){.pause{grid-template-columns:1fr}}
-
 /* -------------------------------------------------------------------------
    Founders
    ------------------------------------------------------------------------- */
