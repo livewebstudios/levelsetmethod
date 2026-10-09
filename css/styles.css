@@ -193,7 +193,7 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
 .header__tagline{
   margin:0;padding:3px 0 3px 18px;
   border-left:1px solid rgba(250,248,245,.4);
-  font-family:var(--font-serif);font-weight:400;font-style:normal;font-size:15px;letter-spacing:.005em;
+  font-family:var(--font-serif);font-weight:400;font-style:normal;font-size:18px;letter-spacing:.005em;
   line-height:1.15;white-space:nowrap;
   opacity:.92;transition:opacity .4s var(--ease), border-color .5s var(--ease);
 }
