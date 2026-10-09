@@ -189,13 +189,13 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
 .header__logo{display:block;width:clamp(170px, 18vw, 240px);position:relative;flex:none}
 .header__logo img{width:100%;transition:opacity .4s var(--ease)}
 .header__logo img.dark{position:absolute;inset:0;opacity:0}
-.header__brand{display:flex;align-items:flex-end;gap:18px;min-width:0}
+.header__brand{display:flex;align-items:center;gap:18px;min-width:0}
 .header__tagline{
-  margin:0 0 4px;padding-left:18px;
+  margin:0;padding:3px 0 3px 18px;
   border-left:1px solid rgba(250,248,245,.4);
-  font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;line-height:1.35;white-space:nowrap;
-  opacity:.85;transition:opacity .4s var(--ease), border-color .5s var(--ease);
+  font-family:var(--font-serif);font-weight:400;font-style:normal;font-size:15px;letter-spacing:.005em;
+  line-height:1.15;white-space:nowrap;
+  opacity:.92;transition:opacity .4s var(--ease), border-color .5s var(--ease);
 }
 .header.is-solid .header__tagline, .header.is-light .header__tagline{border-left-color:rgba(13,13,13,.25)}
 @media (max-width:1180px){.header__tagline{display:none}}
@@ -230,7 +230,7 @@ html.no-js .levels .eyebrow::before,html.no-js .levels .level-mark{opacity:1;tra
   .mobile-nav.is-open a{opacity:1;transform:none}
   .mobile-nav a:nth-child(1){transition-delay:.15s}.mobile-nav a:nth-child(2){transition-delay:.22s}.mobile-nav a:nth-child(3){transition-delay:.29s}.mobile-nav a:nth-child(4){transition-delay:.36s}
   .mobile-nav .mobile-nav__cta{margin-top:30px;font-family:var(--font-body);font-size:16px;color:var(--gold-ink)}
-  .mobile-nav__tagline{position:absolute;left:var(--gutter);right:var(--gutter);bottom:var(--gutter);margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1.6;opacity:0;transition:opacity .5s var(--ease) .45s}
+  .mobile-nav__tagline{position:absolute;left:var(--gutter);right:var(--gutter);bottom:var(--gutter);margin:0;font-family:var(--font-serif);font-size:18px;line-height:1.25;opacity:0;transition:opacity .5s var(--ease) .45s}
   .mobile-nav.is-open .mobile-nav__tagline{opacity:.7}
   .header.menu-open{color:var(--cream);background:transparent;box-shadow:none;backdrop-filter:none}
   .header.menu-open .header__logo img.dark{opacity:0}
